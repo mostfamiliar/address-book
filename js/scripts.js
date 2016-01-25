@@ -28,20 +28,22 @@ $(document).ready(function() {
     var inputCategory = $(this).find("input#category").val();
     var inputToDoItem = $(this).find("input#toDoItem").val();
 
-    var listItem = new Item(inputToDoItem);
+    var listItem = new toDoItem(inputToDoItem);
     var combinedList = new toDoList(inputCategory);
 
     combinedList.items.push(listItem);
 
-    console.log(combinedList);
-    $("ul.itemPrintOut").append("<li>" + combinedList.combinedInfo() + "</li>");
+    $("ul.itemPrintOut").append("<li><input type='checkbox' class='listCheck'>" + " " + combinedList.combinedInfo() + "</input></li>");
 
-    combinedList.items.forEach(function(listObject){
-
+  $(".listCheck").click(function() {
+      var ifChecked = $("input.listCheck").prop('checked');
+      console.log(ifChecked);
+      if (ifChecked) {
+        $("ul.itemPrintOut").empty();
+        $("ul.itemCompleted").append("<li>" + " " + combinedList.combinedInfo() + "</li>");
+      }
     });
 
-    // $("ul#itemCompleted").append(combinedList);
-    console.log(combinedList);
-  });
 
-});
+  });
+ });
